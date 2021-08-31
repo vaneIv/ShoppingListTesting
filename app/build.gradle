@@ -99,6 +99,8 @@ dependencies {
     //Dagger - Hilt
     implementation "com.google.dagger:hilt-android:$daggerHiltVersion"
     kapt "com.google.dagger:hilt-android-compiler:$daggerHiltVersion"
+    implementation "androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03"
+    kapt "androidx.hilt:hilt-compiler:1.0.0"
 
     // Retrofit
     implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
@@ -146,6 +148,7 @@ dependencies {
 }
 
 // Non-existent type correction. Needed for Hilt.
+// Allow references to generated code
 kapt {
     correctErrorTypes true
 }
