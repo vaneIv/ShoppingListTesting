@@ -2,7 +2,7 @@
 buildscript {
     ext.kotlinVersion = '1.5.10'
     ext.navigationVersion = '2.3.5'
-    ext.daggerHiltVersion = '2.28.3-alpha'
+    ext.daggerHiltVersion = '2.38.1'
     repositories {
         google()
         mavenCentral()
