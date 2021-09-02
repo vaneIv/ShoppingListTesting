@@ -5,6 +5,8 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.test.filters.SmallTest
 import com.google.common.truth.Truth.assertThat
 import com.vane.android.shoppinglisttesting.getOrAwaitValue
+import com.vane.android.shoppinglisttesting.launchFragmentInHiltContainer
+import com.vane.android.shoppinglisttesting.ui.ShoppingFragment
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -79,4 +81,10 @@ class ShoppingDaoTest {
         assertThat(totalPriceSum).isEqualTo(2 * 10f + 4 * 5.5f)
     }
 
+    @Test
+    fun testLaunchFragmentInHiltContainer() {
+        launchFragmentInHiltContainer<ShoppingFragment> {
+
+        }
+    }
 }
