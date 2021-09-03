@@ -1,5 +1,6 @@
 package com.vane.android.shoppinglisttesting.ui
 
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.test.espresso.Espresso.onView
@@ -11,6 +12,7 @@ import com.google.common.truth.Truth.assertThat
 import com.vane.android.shoppinglisttesting.R
 import com.vane.android.shoppinglisttesting.getOrAwaitValue
 import com.vane.android.shoppinglisttesting.launchFragmentInHiltContainer
+import com.vane.android.shoppinglisttesting.repositories.FakeShoppingRepositoryAndroidTest
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -25,6 +27,10 @@ import org.mockito.Mockito.verify
 @HiltAndroidTest
 @ExperimentalCoroutinesApi
 class AddShoppingItemFragmentTest {
+
+    // Executes each task synchronously using Architecture Components.
+    @get:Rule
+    var instantTaskExecutorRule = InstantTaskExecutorRule()
 
     @get:Rule
     var hiltRule = HiltAndroidRule(this)
@@ -60,6 +66,22 @@ class AddShoppingItemFragmentTest {
         pressBack()
 
         verify(navController).popBackStack()
+    }
+
+    @Test
+    fun pressBackButton_imageUrlSetToEmptyString() {
+        val testViewModel = ShoppingViewModel(FakeShoppingRepositoryAndroidTest())
+        val navController = mock(NavController::class.java)
+
+        launchFragmentInHiltContainer<AddShoppingItemFragment> {
+            Navigation.setViewNavController(requireView(), navController)
+            viewModel = testViewModel
+        }
+
+        pressBack()
+
+        // val value = testViewModel.curImageUrl.getOrAwaitValue()
+        assertThat(testViewModel.curImageUrl.getOrAwaitValue()).isEmpty()
     }
 
 //    @Test

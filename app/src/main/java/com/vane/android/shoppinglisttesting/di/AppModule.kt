@@ -2,6 +2,9 @@ package com.vane.android.shoppinglisttesting.di
 
 import android.content.Context
 import androidx.room.Room
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
+import com.vane.android.shoppinglisttesting.R
 import com.vane.android.shoppinglisttesting.data.local.ShoppingDao
 import com.vane.android.shoppinglisttesting.data.local.ShoppingItemDatabase
 import com.vane.android.shoppinglisttesting.data.remote.UnsplashApi
@@ -51,4 +54,13 @@ object AppModule {
             .create(UnsplashApi::class.java)
     }
 
+    @Singleton
+    @Provides
+    fun provideGlideInstance(
+        @ApplicationContext context: Context
+    ) = Glide.with(context).setDefaultRequestOptions(
+        RequestOptions()
+            .placeholder(R.drawable.ic_image)
+            .error(R.drawable.ic_image)
+    )
 }
