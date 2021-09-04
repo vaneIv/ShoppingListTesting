@@ -1,5 +1,6 @@
 package com.vane.android.shoppinglisttesting.repositories
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import com.vane.android.shoppinglisttesting.data.local.ShoppingDao
 import com.vane.android.shoppinglisttesting.data.local.ShoppingItem
@@ -39,6 +40,7 @@ class DefaultShoppingRepository(
                 Resource.error("An unknown error occurred", null)
             }
         } catch (e: Exception) {
+            Log.e("EXCEPTION", "EXCEPTION:", e)
             Resource.error("Couldn't reach the server. Check your internet connection", null)
         }
     }
